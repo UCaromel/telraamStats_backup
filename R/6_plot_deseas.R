@@ -12,7 +12,7 @@
 #' @param public_holidays public holidays period for filtering function
 #'
 #'
-#' @importFrom ggplot2 ggplot geom_line scale_x_continuous labs ggtitle theme
+#' @import ggplot2
 #'
 #' @return A list of plots including trend, seasonal, random, peaks, and correlation
 #'
@@ -46,8 +46,9 @@ plot_deseas <- function(data, sensor1,sensor2, hour_x, direction1, direction2, m
           panel.grid = element_line(color = "#E3E3E3"),
           panel.border = element_rect(color = "#E3E3E3", size = 2))
   # trend
-  graphiques$trend <- ggplot(trend_random) +
-    geom_line(aes(x=date,y=.data$trend,col=.data$sensor),size=1) +
+  graphiques$trend <- ggplot(trend_random, aes(x = date)) +
+    geom_line(aes(y=.data$base,col=.data$sensor), alpha = 0.4) +
+    geom_line(aes(y=.data$trend,col=.data$sensor),size=1) +
     ggtitle('Trend')+
     put_ticks+
     theme_bw()+

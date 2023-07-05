@@ -20,6 +20,7 @@ Imports:
     rlang,
     synchrony,
     tibble,
+    tidyr,
     zoo
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -4,28 +4,14 @@
 \alias{retrieve_sensor}
 \title{Retrieve data associated with a sensor from the Telraam API}
 \usage{
-retrieve_sensor(
-  nom,
-  date1,
-  date2,
-  listeSegments = c(9000002156, 9000001906, 9000001618, 9000003090, 9000002453,
-    9000001844, 9000001877, 9000002666, 9000002181, 9000002707, 9000003703, 9000003746,
-    9000003775, 9000003736),
-  listeNom = c("Burel", "Leclerc", "ParisMarche", "rueVignes", "ParisArcEnCiel",
-    "RteVitre", "RueGdDomaine", "StDidierNord", "rueVallee", "StDidierSud", "RuePrieure",
-    "RueCottage", "RueVeronniere", "RueDesEcoles")
-)
+retrieve_sensor(id_sensor, date1, date2)
 }
 \arguments{
-\item{nom}{Character. Name of the sensor, obtained from the \code{listeNom} vector.}
+\item{id_sensor}{Numeric. ID of the sensor}
 
-\item{date1}{Date. Start date in "yyyy-mm-dd" format.}
+\item{date1}{Date. Start date "aaaa-mm-jj"}
 
-\item{date2}{Date. End date in "yyyy-mm-dd" format.}
-
-\item{listeSegments}{A character vector containing the ID of each vector}
-
-\item{listeNom}{A character vector containing the name of each sensor that is displayed to the user}
+\item{date2}{Date. End date "aaaa-mm-jj"}
 }
 \description{
 This function retrieves data associated with a sensor from the Telraam API. The data is retrieved for a specified time period between \code{date1} and \code{date2} (inclusive).

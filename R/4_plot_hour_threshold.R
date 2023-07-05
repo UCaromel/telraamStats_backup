@@ -8,11 +8,12 @@
 #'
 #' @return A list containing the plotly figure and the aggregated traffic data by hour.
 #'
+#' @import ggplot2
 #' @importFrom dplyr group_by summarise full_join %>%
 #' @importFrom lubridate hour
 #' @importFrom stats sd
-#' @importFrom ggplot2 geom_point scale_y_continuous sec_axis scale_linetype_manual theme_bw element_line
 #' @importFrom rlang :=
+#' @importFrom tidyr pivot_longer
 #'
 #' @export
 plot_hour_threshold <- function(...) {
@@ -29,9 +30,9 @@ plot_hour_threshold <- function(...) {
   heavy_lft <- data$heavy_lft
 
   calc <- summarize_data(data, v85, car_rgt, heavy_rgt, car_lft, heavy_lft,
-                         "speed", "B_to_A", "A_to_B")
+                         "v85", "B_to_A", "A_to_B")
 
-  speed <- calc$speed
+  v85 <- calc$v85
   B_to_A <- calc$B_to_A
   A_to_B <- calc$A_to_B
 
@@ -40,35 +41,33 @@ plot_hour_threshold <- function(...) {
   # These variables are used to center and reduce the second scale (right axe)
   mean_car <- mean(c(B_to_A,B_to_A))
   sd_car <- sd(c(B_to_A,B_to_A))
-  mean_speed <- mean(speed)
-  sd_speed <- sd(speed)
-  calc <- calc %>% mutate(speed = ((speed-mean_speed)/sd_speed)*sd_car+mean_car)
+  mean_speed <- mean(v85)
+  sd_speed <- sd(v85)
+  calc <- calc %>% mutate(v85 = ((v85-mean_speed)/sd_speed)*sd_car+mean_car)%>%
+    pivot_longer( cols=c(v85,B_to_A,A_to_B),names_to="Legend",values_to="valeur")
 
-  graph <- ggplot(calc, aes(x = hour)) +
-    geom_line(aes(y = B_to_A, color = "B vers A", linetype = "B vers A"), size = 1) +
-    geom_line(aes(y = A_to_B, color = "A vers B", linetype = "A vers B"), size = 1) +
-    geom_line(aes(y = speed, color = "Vitesse v85 moyen", linetype = "Nombre de vehicules moyen"), size = 1) +
-    geom_point(aes(y = B_to_A), color = "blue",size = 3) +
-    geom_point(aes(y = A_to_B), color = "blue",size = 3) +
-    geom_point(aes(y = speed), color = "red",size = 3) +
-    labs(x = "Heure", y = "Nombre de vehicules moyen", color = "Legende", linetype = "Legende") +
-    scale_y_continuous(
-      sec.axis = sec_axis(~((.-mean_car)/sd_car)*sd_speed+mean_speed, name = "Vitesse v85 moyenne (km/h)")
-      # breaks = seq(0,round(max(calc$Vitesse))+100,100)
-    ) +
-    scale_x_continuous(
-      breaks = min(calc$hour):max(calc$hour)
-    ) +
-    scale_color_manual(values = c("blue", "blue", "red")) +
-    scale_linetype_manual(values = c("dotted", "solid", "solid")) +
+
+
+  graph <- ggplot(calc, aes(x = hour, y = .data$valeur, group=.data$Legend, shape=.data$Legend, colour=.data$Legend)) +
+    geom_line(aes(linetype=.data$Legend),size = 1) +
+    geom_point(size = 3)+
+    scale_color_manual(values = c("#006bb6", "#006bb6", "#ff5900"))+ # legend
+    scale_linetype_manual(values = c("dotted", "solid","solid")) + # legend
+    ylab('Nombre de vehicules moyen')+
+    scale_y_continuous(sec.axis = sec_axis(~((.-mean_voiture)/sd_voiture)*sd_speed+mean_speed, # tracing the second axis
+                                           name = "Vitesse v85 moyenne (km/h)")) +
+    scale_x_continuous(breaks = min(calc$hour):max(calc$hour)) +
     theme_bw() +
-    theme(legend.position = "bottom", legend.box = "horizontal",
-          axis.ticks.y.left = element_line(color = "blue"), # change the color of the ticks
-          axis.text.y.left = element_text(color = "blue"), # change the color of the number associated to a tick
-          axis.text.y.right = element_text(color = "red"),
-          axis.ticks.y.right = element_line(color = "red"),
-          axis.title.y.left = element_text(color = "blue"),
-          axis.title.y.right = element_text(color = "red"))
+    theme(legend.position = "bottom", legend.box = "horizontal", # the whole code in this theme() function is about color
+          axis.ticks.y.left = element_line(color = "#006bb6"), # ticks (left axis)
+          axis.text.y.left = element_text(color = "#006bb6"), # number associated to a tick (left axis)
+          axis.title.y.left = element_text(color = "#006bb6"), # title of an axis (left axis)
+          axis.title.y.right = element_text(color = "#ff5900"), # ticks (right axis)
+          axis.text.y.right = element_text(color = "#ff5900") , # number associated to a tick (right axis)
+          axis.ticks.y.right = element_line(color = "#ff5900"), # title of an axis (right axis)
+          panel.background = element_rect(fill = "#F5F5F5"), # background
+          panel.grid = element_line(color = "#E3E3E3"), # grid
+          panel.border = element_rect(color = "#E3E3E3", size = 2)) #border of the chart
 
   return(list(graph=graph,data=calc))
 

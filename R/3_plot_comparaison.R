@@ -5,9 +5,8 @@
 #' @param color_graph Color palette for the plot
 #'
 #'
+#' @import ggplot2
 #' @importFrom dplyr filter case_when %>%
-#' @importFrom ggplot2 ggplot aes geom_histogram scale_x_continuous scale_color_manual expand_limits
-#' @importFrom ggplot2 scale_fill_manual theme element_text element_blank labs geom_ribbon element_rect
 #' @importFrom purrr map_dbl
 #' @importFrom lubridate hour
 #' @importFrom stats qt
