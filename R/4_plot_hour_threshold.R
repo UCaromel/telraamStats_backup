@@ -16,6 +16,8 @@
 #' @importFrom tidyr pivot_longer
 #'
 #' @export
+#'
+#'
 plot_hour_threshold <- function(...) {
   data <- do.call(filtering,list(...))
 
@@ -54,7 +56,7 @@ plot_hour_threshold <- function(...) {
     scale_color_manual(values = c("#006bb6", "#006bb6", "#ff5900"))+ # legend
     scale_linetype_manual(values = c("dotted", "solid","solid")) + # legend
     ylab('Nombre de vehicules moyen')+
-    scale_y_continuous(sec.axis = sec_axis(~((.-mean_voiture)/sd_voiture)*sd_speed+mean_speed, # tracing the second axis
+    scale_y_continuous(sec.axis = sec_axis(~((.-mean_car)/sd_car)*sd_speed+mean_speed, # tracing the second axis
                                            name = "Vitesse v85 moyenne (km/h)")) +
     scale_x_continuous(breaks = min(calc$hour):max(calc$hour)) +
     theme_bw() +

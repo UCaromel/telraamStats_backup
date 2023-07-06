@@ -13,6 +13,7 @@
 #' @importFrom dplyr filter bind_rows %>%
 #' @export
 #'
+#'
 retrieve_sensor <- function(id_sensor,date1,date2){
 
   result <- data.frame()

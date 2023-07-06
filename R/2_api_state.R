@@ -6,6 +6,8 @@
 #' @export
 #'
 #' @importFrom httr VERB
+#'
+#'
 api_state <- function(key){
   key <- c(
     'X-Api-Key' = readLines(key)
