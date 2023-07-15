@@ -1,6 +1,6 @@
-# Mov'around
+# telraamStats
 
-The aim of this package is to grant the user tools for data visualisation and data analysis of mobility data for Telraam sensors. It reuses and expands on functionnalities from this [`application`](https://agistaterre.shinyapps.io/traffic_routier/).
+The aim of this package is to grant the user tools for data visualisation and data analysis of mobility data for Telraam sensors. It reuses and expands on functionnalities from this [`application`](https://agistaterre.shinyapps.io/mov-around/).
 
 [`Link to the Github`](https://github.com/agistaterre/mov-around)
 
