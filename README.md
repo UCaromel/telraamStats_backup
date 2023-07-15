@@ -33,4 +33,8 @@ install.packages(c("cowplot",
     "zoo"))
 ```
 
+If you want to install this package, you can use :
 
+``` r
+devtools::install_github(" https://github.com/UCaromel/movaround_pkg")
+```
