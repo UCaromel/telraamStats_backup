@@ -9,8 +9,5 @@
 #'
 #'
 api_state <- function(key){
-  key <- c(
-    'X-Api-Key' = readLines(key)
-  )
   VERB("GET", url = "https://telraam-api.net/v1", add_headers(key))$status_code == 200  # the request suceeded if equal to 200
 }
