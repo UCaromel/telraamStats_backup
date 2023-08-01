@@ -12,6 +12,8 @@
 #'
 #' @return A data frame containing the imported and combined sensor data.
 #'
+#' @export
+#'
 import_sensor_comp <- function(sensor_ids,sensor_comp_names){
   data <- data.frame()
   data <- map_dfr(sensor_comp_names, ~ {

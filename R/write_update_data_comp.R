@@ -12,6 +12,7 @@
 #' @importFrom dplyr slice select mutate arrange filter
 #' @importFrom readr read_csv2 write_csv2
 #' @importFrom stringr str_sub
+#'
 #' @export
 #'
 write_update_data_comp <- function(id_sensor, date1, date2,
