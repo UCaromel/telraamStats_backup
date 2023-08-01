@@ -40,10 +40,28 @@
     <loc>/reference/filtering.html</loc>
   </url>
   <url>
+    <loc>/reference/gg_working_sensor.html</loc>
+  </url>
+  <url>
+    <loc>/reference/imp_na.html</loc>
+  </url>
+  <url>
     <loc>/reference/import_sensor.html</loc>
   </url>
   <url>
+    <loc>/reference/import_sensor_comp.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mutate_date_time.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mutate_udh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mutate_uptime.html</loc>
   </url>
   <url>
     <loc>/reference/plot_comparaison.html</loc>
@@ -64,6 +82,12 @@
     <loc>/reference/prep.html</loc>
   </url>
   <url>
+    <loc>/reference/prep_comp_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/prep_view_data.html</loc>
+  </url>
+  <url>
     <loc>/reference/retrieve_sensor.html</loc>
   </url>
   <url>
@@ -77,5 +101,8 @@
   </url>
   <url>
     <loc>/reference/write_update_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/write_update_data_comp.html</loc>
   </url>
 </urlset>
